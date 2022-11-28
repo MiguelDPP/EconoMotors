@@ -13,9 +13,15 @@ class MyDocument extends Document {
           <body>
             <Main />
             <NextScript>
-              <script src={'bootstrap/dist/js/bootstrap.bundle.min.js'} />
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossOrigin="anonymous"></script>
+              <script src="../assets/js/jquery.js"></script>
+              <script src="../assets/js/bootstrap.b.js"></script>
+
+              <script src="../assets/js/jq.easing.js"></script>
               <script src="../assets/js/sb-admin.js"/>
+
+              <script src="../assets/js/dataTables.js"></script>
+              <script src="../assets/js/dataTables.b.js"></script>
+              <script src="../assets/js/dataTables.demo.js"></script>
             </NextScript>
             
           </body>
