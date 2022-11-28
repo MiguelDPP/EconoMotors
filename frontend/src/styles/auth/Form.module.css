@@ -1,0 +1,120 @@
+.containerMain {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1130px;
+  max-height: 588px;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+.Row {
+  /* width: 100%; */
+  height: 100% !important;
+}
+
+.contentImage {
+  overflow: hidden;
+}
+
+.imageForm{
+  width: 100%;
+  margin-top: -110px;
+  height: 100%;
+}
+
+.contentForm {
+  /* background: rgba(255, 255, 255, 0.8) !important; */
+  /* box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25) !important; */
+  /* border-radius: 0px 30px 30px 0px !important; */
+  display: flex;
+  height: 588px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  padding: 0 50px;
+}
+
+.formGroup {
+  width: 100%;
+}
+.formLabel {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.formLabel span {
+  color: #DA3030;
+}
+
+.formCheck {
+  font-size: 16px;
+}
+
+.formControl {
+  /* background: #FFFFFF; */
+  border: 1px solid #D0DAD9;
+  border-radius: 10px;
+}
+
+.formTitle {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 44px;
+  text-align: center;
+
+  color: #000000;
+}
+.form p {
+  width: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #136C62;
+}
+.link:hover {
+  text-decoration: underline;
+  color: #136C62;
+}
+
+.formButton {
+  padding: 10px 20px;
+  background: #136C62;
+  border-radius: 63px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #FFFFFF;
+  transition: all 0.3s ease-in-out;
+}
+
+.formButton:hover {
+  color: #136C62;
+  background: #FFFFFF;
+  border: 1px solid #136C62;
+}
