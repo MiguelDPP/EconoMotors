@@ -10,7 +10,7 @@ const DashboardLayout = ({children}) => {
       </Head>
       <div id="wrapper">
         {/* Sidebar */}
-        <ul className="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul className="navbar-nav bg-gradient-black sidebar sidebar-dark accordion" id="accordionSidebar">
           {/* Sidebar - Brand */}
           <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div className="sidebar-brand-icon rotate-n-15">
@@ -21,6 +21,11 @@ const DashboardLayout = ({children}) => {
           {/* Divider */}
           <hr className="sidebar-divider my-0" />
           {/* Nav Item - Dashboard */}
+          <li className="nav-item active">
+            <Link className="nav-link" href="/">
+              <i className="fas fa-fw fa-tachometer-alt" />
+              <span>Perfil</span></Link>
+          </li>
           <li className="nav-item active">
             <Link className="nav-link" href="/">
               <i className="fas fa-fw fa-tachometer-alt" />
