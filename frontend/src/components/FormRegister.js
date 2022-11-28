@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@styles/auth/Form.module.css';
 import { Form, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
-import bg from '@images/bg2.png';
+import bg from '@images/bg4.png';
 import Link from 'next/link';
 
 const FormRegister = () => {
@@ -57,7 +57,7 @@ const FormRegister = () => {
                 </Col>
                 <Col>
                   <Form.Group className={`${styles.formGroup} mt-4`} controlId="formBasicEmail">
-                    <Form.Label className={`${styles.formLabel}`}>contraseña <span>*</span></Form.Label>
+                    <Form.Label className={`${styles.formLabel}`}>Contraseña <span>*</span></Form.Label>
                     <Form.Control type="password" placeholder="" className={`${styles.formControl}`} />
                   </Form.Group>
                 </Col>
@@ -65,7 +65,7 @@ const FormRegister = () => {
               <Form.Group className={`${styles.formGroup} mt-4 d-flex justify-content-between align-items-center`}>
                 <Form.Check type="checkbox" label="Acepto los terminos y politica de privacidad" className={`${styles.formCheck}`} />
               </Form.Group>
-              <button className={`${styles.formButton} btn mt-5`}>Iniciar Sesión</button>
+              <button className={`${styles.formButton} btn mt-2`}>Iniciar Sesión</button>
             </Form>
           </Col>
         </Row>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@styles/auth/Form.module.css';
 import { Form, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
-import bg from '@images/bg1.png';
+import bg from '@images/bg3.png';
 import Link from 'next/link';
 
 const FormLogin = () => {
@@ -29,7 +29,7 @@ const FormLogin = () => {
                 <Form.Check type="checkbox" label="Recuerdame" className={`${styles.formCheck}`} />
                 <Link href="/forgot-password" className={`${styles.link}`}>Olvide mi contraseña</Link>
               </Form.Group>
-              <button className={`${styles.formButton} btn mt-5`}>Iniciar Sesión</button>
+              <button className={`${styles.formButton} btn mt-2`}>Iniciar Sesión</button>
             </Form>
           </Col>
         </Row>
