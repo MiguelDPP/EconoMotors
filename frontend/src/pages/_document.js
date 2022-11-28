@@ -1,4 +1,5 @@
 import Document, {Html, Head, Main, NextScript} from "next/document";
+import sbAdmin from '@js/sb-admin.js';
 
 class MyDocument extends Document {
     render() {
@@ -11,6 +12,7 @@ class MyDocument extends Document {
           <body>
             <Main />
             <NextScript />
+            <script src={sbAdmin} />
           </body>
         </Html>
       );

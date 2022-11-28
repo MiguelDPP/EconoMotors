@@ -4066,6 +4066,10 @@
     background-color: #fff;
     border-color: #dddfeb #dddfeb #fff;
   }
+
+  .nav-dh:hover{
+    background-color: #2b2b2c !important;
+  }
   
   .nav-tabs .dropdown-menu {
     margin-top: -1px;

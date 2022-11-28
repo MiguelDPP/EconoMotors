@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import '@styles/Dashboardstyles.css';
 import 'Bootstrap/dist/css/bootstrap.min.css';
+import 'jquery';
 import { useRouter } from 'next/router';
 import DashboardLayout from '@layouts/DashboardLayout';
 
