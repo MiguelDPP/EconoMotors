@@ -5,6 +5,10 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  background: #232526;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #e7cc05, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #1c1b1b, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .container {
@@ -39,6 +43,7 @@
   height: 588px;
   justify-content: center;
   align-items: center;
+  background-color: #FFFFFF;
 }
 
 .form {
@@ -96,16 +101,16 @@
 .link {
   text-decoration: none;
   font-weight: 500;
-  color: #136C62;
+  color: #e7cc05;
 }
 .link:hover {
   text-decoration: underline;
-  color: #136C62;
+  color: #e7cc05;
 }
 
 .formButton {
   padding: 10px 20px;
-  background: #136C62;
+  background: #e7cc05;
   border-radius: 63px;
   font-weight: 400;
   font-size: 16px;
@@ -114,7 +119,7 @@
 }
 
 .formButton:hover {
-  color: #136C62;
+  color: #e7cc05;
   background: #FFFFFF;
-  border: 1px solid #136C62;
+  border: 1px solid #e7cc05;
 }

@@ -10,7 +10,7 @@ const DashboardLayout = ({children}) => {
       </Head>
       <div id="wrapper">
         {/* Sidebar */}
-        <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul className="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
           {/* Sidebar - Brand */}
           <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div className="sidebar-brand-icon rotate-n-15">
