@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import styles from '@styles/Dashboard.module.css';
+import { Dropdown, DropdownButton, Image, ProgressBar } from 'react-bootstrap';
 
 const DashboardLayout = ({children}) => {
   return (
@@ -14,7 +16,7 @@ const DashboardLayout = ({children}) => {
           {/* Sidebar - Brand */}
           <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div className="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-motorcycle"></i>
+            <i className="fas fa-motorcycle"></i>
             </div>
             <div className="sidebar-brand-text mx-3">EconoMotors</div>
           </Link>
@@ -45,39 +47,67 @@ const DashboardLayout = ({children}) => {
         </ul>
         {/* End of Sidebar */}
         {/* Content Wrapper */}
-
         <div id="content-wrapper" className="d-flex flex-column">
-          <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                    
-                </a>
+          <nav className={`navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ${styles.nav}`}>
+            
+            <div className={`${styles.info}`}>
+              <div className={`${styles.infoItem}`} >
+                <i className="fas fa-gas-pump"></i>
+                <ProgressBar now={60} />
+              </div>
+              <div className={`${styles.infoItem}`} >
+                <i className="fas fa-oil-can"></i>
+                <ProgressBar now={30} variant="danger" />
+              </div>
+              
+            </div>
 
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
-                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                    </a>
-                </div>
-              </li>
-            </ul>
+            <div className={styles.drops}>
+              <Dropdown className={`${styles.menu}`} >
+                  <Dropdown.Toggle className={``}>
+                    <i className="fas fa-envelope mr-2"></i>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu variant="dark" className='mt-2' style={{maxWidth: 300}} >
+                    <Dropdown.Item href="#/action-1" active>
+                      Action
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link}  href="/dashboard/profile">Es hora de cambiar el aceite de tu moto</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+
+                <Dropdown className={`${styles.menu}`} >
+                  <Dropdown.Toggle as="span" className={styles.toggle}>
+                    <span className="mr-2">Miguel</span>
+                    <Image src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=Miguel+Portillo" className='rounded-circle' />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu variant="dark" className='mt-2' >
+                    <Dropdown.Item href="#/action-1">
+                      <i className="fas fa-user-circle"></i> <span className="ml-2">Perfil</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link}  href="/dashboard/profile">
+                      <i className="fas fa-clipboard-list"></i> <span className="ml-2">Horarios</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">
+                      <i className="fas fa-store"></i> <span className="ml-2">Tienda</span>
+                    </Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="#/action-4">
+                      <i class="fas fa-door-open"></i> <span className="ml-2">Cerrar Sesión</span>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              <i class="fas fa-comments-alt"></i>
+
+            </div>
+            
+            
+
           </nav>
           <div className='row'>
             {children}
