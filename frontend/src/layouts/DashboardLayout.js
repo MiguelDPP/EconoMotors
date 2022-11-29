@@ -15,10 +15,10 @@ const DashboardLayout = ({children}) => {
         <ul className="navbar-nav bg-gradient-dark-personality sidebar sidebar-dark accordion" id="accordionSidebar">
           {/* Sidebar - Brand */}
           <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-            <div className="sidebar-brand-icon rotate-n-15">
+            <div className="sidebar-brand-icon rotate-n-15 text-warning">
             <i className="fas fa-motorcycle"></i>
             </div>
-            <div className="sidebar-brand-text mx-3">EconoMotors</div>
+            <div className="sidebar-brand-text mx-3 text-warning">EconoMotors</div>
           </Link>
           {/* Divider */}
           <hr className="sidebar-divider my-0" />
@@ -53,18 +53,18 @@ const DashboardLayout = ({children}) => {
             <div className={`${styles.info}`}>
               <div className={`${styles.infoItem}`} >
                 <i className="fas fa-gas-pump"></i>
-                <ProgressBar now={60} />
+                <ProgressBar now={60} variant="warning" />
               </div>
               <div className={`${styles.infoItem}`} >
                 <i className="fas fa-oil-can"></i>
-                <ProgressBar now={30} variant="danger" />
+                <ProgressBar now={30} variant="warning" />
               </div>
               
             </div>
 
             <div className={styles.drops}>
-              <Dropdown className={`${styles.menu}`} >
-                  <Dropdown.Toggle className={``}>
+              <Dropdown className={`${styles.menu} `} >
+                  <Dropdown.Toggle className={`btn-warning`}>
                     <i className="fas fa-envelope mr-2"></i>
                   </Dropdown.Toggle>
 
@@ -83,7 +83,7 @@ const DashboardLayout = ({children}) => {
                 <Dropdown className={`${styles.menu}`} >
                   <Dropdown.Toggle as="span" className={styles.toggle}>
                     <span className="mr-2">Miguel</span>
-                    <Image src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=Miguel+Portillo" className='rounded-circle' />
+                    <Image src="https://ui-avatars.com/api/?background=e7cc05&color=fff&name=Miguel+Portillo" className='rounded-circle' />
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu variant="dark" className='mt-2' >
@@ -110,7 +110,9 @@ const DashboardLayout = ({children}) => {
 
           </nav>
           <div className='row'>
-            {children}
+            <div className={styles.container}>
+              {children}
+            </div>
           </div>
         </div>
       </div>

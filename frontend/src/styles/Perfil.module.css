@@ -1,0 +1,120 @@
+.containerMain {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e7cc05, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #1c1b1b, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1130px;
+    max-height: 588px;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+  
+  .Row {
+    /* width: 100%; */
+    height: 100% !important;
+  }
+  
+  .contentImage {
+    overflow: hidden;
+  }
+  
+  .imageForm{
+    width: 100%;
+    margin-top: -110px;
+    height: 100%;
+  }
+  
+  .contentForm {
+    /* background: rgba(255, 255, 255, 0.8) !important; */
+    /* box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25) !important; */
+    /* border-radius: 0px 30px 30px 0px !important; */
+    display: flex;
+    height: 588px;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+  }
+  
+  .form {
+    width: 80%;
+    /* align-items: center; */
+    padding: 0 50px;
+  }
+  
+  .formGroup {
+    width: 100%;
+  }
+  .formLabel {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .formLabel span {
+    color: #DA3030;
+  }
+  
+  .formCheck {
+    font-size: 16px;
+  }
+  
+  .formControl {
+    /* background: #FFFFFF; */
+    border: 1px solid #D0DAD9;
+    border-radius: 10px;
+  }
+  
+  .formTitle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 44px;
+  
+    color: #000000;
+  }
+  .form p {
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  
+  .link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #e7cc05;
+  }
+  .link:hover {
+    text-decoration: underline;
+    color: #e7cc05;
+  }
+  
+  .formButton {
+    padding: 10px 20px;
+    background: #e7cc05;
+    border-radius: 63px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFFFFF;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .formButton:hover {
+    color: #e7cc05;
+    background: #FFFFFF;
+    border: 1px solid #e7cc05;
+  }
+  
