@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useRouter } from 'next/router';
 import DashboardLayout from '@layouts/DashboardLayout';
+import { ProviderAuth } from "hooks/useAuth";
+import { ProviderAlert } from "hooks/useAlert";
 
 function Main ({children}) {
   return (
@@ -27,8 +29,12 @@ export default function MyApp({ Component, pageProps }) {
 
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ProviderAuth>
+      <ProviderAlert>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ProviderAlert>
+    </ProviderAuth>
   )
 }
