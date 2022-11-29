@@ -32,9 +32,9 @@ function useProvideAuth(){
     }
     //Peticion a la API para actuailizar los usuarios
     const updateUser = async (data) =>{
-        const response = await axios.patch(endPoints.auth.updateUser, data ,{
+        const response = await axios.patch(endPoints.auth.userProfile, data ,{
             headers: {
-                "Content-Type": "application/json",
+                Authorization: `Bearer ${Cookie.get("access_token")}`,
             }
         });
         return response;
@@ -90,7 +90,8 @@ function useProvideAuth(){
         register,
         getUser,
         signin,
-        sendEmail
+        sendEmail,
+        updateUser
     }
 
 }
