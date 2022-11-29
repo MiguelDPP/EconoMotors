@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import FormMoto from 'components/FormMoto';
 
 const moto = () => {
   return (
-    <div>moto</div>
+    <FormMoto/>
   )
 }
 

@@ -53,5 +53,6 @@
 }
 
 .container{
-  padding-left: 50px !important;
+  padding: 0 20px;
+  /* padding-left: 50px !important; */
 }
