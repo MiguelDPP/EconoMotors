@@ -8,3 +8,5 @@ const endPoints = {
         sendEmail: `${API}/api/recovery`,
     }
 }
+
+export default endPoints;

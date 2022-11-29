@@ -9,7 +9,7 @@ const AuthContext = createContext({});
 
 export function ProviderAuth({children}){
     const auth = useProvideAuth();
-    return <AuthContext.Provider value={auth}>{children}</ AuthContext.Provider>
+    return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
 export const useAuth = () =>{
     return useContext(AuthContext);
@@ -25,7 +25,7 @@ function useProvideAuth(){
     const register = async (data) =>{
         const response = await axios.post(endPoints.auth.register, data ,{
             headers: {
-              Authorization: `Bearer ${Cookie.get("access_token")}`,
+                "Content-Type": "application/json",
             }
         });
         return response;
@@ -34,9 +34,12 @@ function useProvideAuth(){
     //Peticion a la API para obtener los datos del usuario
     const getUser = async () => {
         const data = await axios.get(endPoints.auth.userProfile,{
-            Authorization: `Bearer ${Cookie.get("access_token")}`,
+            headers: {
+                Authorization: `Bearer ${Cookie.get("access_token")}`,
+            }
         });
-        setUser(data.user);
+        setUser(data.data.user);
+        return data;
     }
 
     //Peticion a la API para el Inicio de Sesión
