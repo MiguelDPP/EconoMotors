@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from '@styles/Dashboard.module.css';
-import { Dropdown, DropdownButton, Image, ProgressBar } from 'react-bootstrap';
+import { Badge, Dropdown, DropdownButton, Image, ProgressBar } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '@hooks/useAuth';
 import Cookie from 'js-cookie';
@@ -115,14 +115,24 @@ const DashboardLayout = ({ children }) => {
           <nav className={`navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ${styles.nav}`}>
             
             <div className={`${styles.info}`}>
-              <div className={`${styles.infoItem}`} >
-                <i className="fas fa-gas-pump"></i>
-                <ProgressBar now={60} variant="warning" />
-              </div>
-              <div className={`${styles.infoItem}`} >
-                <i className="fas fa-oil-can"></i>
-                <ProgressBar now={30} variant="warning" />
-              </div>
+              { user && user.motorbikes.length > 0 && (
+                <>
+                  <div className={`${styles.infoItem}`} >
+                    <i className="fas fa-gas-pump"></i>
+                    <ProgressBar now={60} variant="warning" />
+                  </div>
+                  <div className={`${styles.infoItem}`} >
+                    <i className="fas fa-oil-can"></i>
+                    <ProgressBar now={30} variant="warning" />
+                  </div>
+                </>
+              ) }
+
+              { user && user.motorbikes.length === 0 && (
+                <>
+                  <Badge bg="danger" style={{fontSize: 21}}>No tienes la moto registrada</Badge> <Link className="btn btn-primary ml-1" href="/dashboard/moto">Registrala aqui</Link>
+                </>
+              )}
               
             </div>
 
@@ -173,11 +183,9 @@ const DashboardLayout = ({ children }) => {
             
 
           </nav>
-          <div className='row'>
             <div className={styles.container}>
               {children}
             </div>
-          </div>
         </div>
       </div>
         </>
