@@ -64,6 +64,7 @@ const DashboardLayout = ({ children }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     Cookie.remove("access_token");
+    setUser(null);
     router.push("/");
   } 
 
@@ -72,112 +73,114 @@ const DashboardLayout = ({ children }) => {
       {isReady && (
         <>
           <Head>
-            <script src="https://kit.fontawesome.com/a2a9079cf6.js" crossorigin="anonymous"></script>
-          </Head>
-          <div id="wrapper">
-            {/* Sidebar */}
-            <ul className="navbar-nav bg-gradient-dark-personality sidebar sidebar-dark accordion" id="accordionSidebar">
-              {/* Sidebar - Brand */}
-              <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div className="sidebar-brand-icon rotate-n-15">
-                  <i className="fas fa-motorcycle"></i>
-                </div>
-                <div className="sidebar-brand-text mx-3">EconoMotors</div>
-              </Link>
-              {/* Divider */}
-              <hr className="sidebar-divider my-0" />
-              {/* Nav Item - Dashboard */}
-              <li className="nav-item nav-dh">
-                <Link className="nav-link" href="/dashboard">
-                  <i className="fas fa-fw fa-tachometer-alt" />
-                  <span>Perfil</span></Link>
-              </li>
-              <li className="nav-item nav-dh ">
-                <Link className="nav-link" href="/dashboard/moto">
-                  <i className="fas fa-fw fa-tachometer-alt" />
-                  <span>Moto</span></Link>
-              </li>
-              <li className="nav-item nav-dh">
-                <Link className="nav-link" href="/">
-                  <i className="fas fa-fw fa-tachometer-alt" />
-                  <span>Mantenimiento</span></Link>
-              </li>
-              <li className="nav-item nav-dh">
-                <Link className="nav-link" href="/connect">
-                  <i className="fas fa-server"></i>
-                  <span>Broker</span></Link>
-              </li>
+        <script src="https://kit.fontawesome.com/a2a9079cf6.js" crossorigin="anonymous"></script>
+      </Head>
+      <div id="wrapper">
+        {/* Sidebar */}
+        <ul className="navbar-nav bg-gradient-dark-personality sidebar sidebar-dark accordion" id="accordionSidebar">
+          {/* Sidebar - Brand */}
+          <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <div className="sidebar-brand-icon rotate-n-15 text-warning">
+            <i className="fas fa-motorcycle"></i>
+            </div>
+            <div className="sidebar-brand-text mx-3 text-warning">EconoMotors</div>
+          </Link>
+          {/* Divider */}
+          <hr className="sidebar-divider my-0" />
+          {/* Nav Item - Dashboard */}
+          <li className="nav-item nav-dh active">
+            <Link className="nav-link" href="/">
+              <i className="fas fa-fw fa-tachometer-alt" />
+              <span>Perfil</span></Link>
+          </li>
+          <li className="nav-item nav-dh ">
+            <Link className="nav-link" href="/">
+              <i className="fas fa-fw fa-tachometer-alt" />
+              <span>Moto</span></Link>
+          </li>
+          <li className="nav-item nav-dh">
+            <Link className="nav-link" href="/">
+              <i className="fas fa-fw fa-tachometer-alt" />
+              <span>Mantenimiento</span></Link>
+          </li>
+          <li className="nav-item nav-dh">
+            <Link className="nav-link" href="/connect">
+            <i className="fas fa-server"></i>
+              <span>Broker</span></Link>
+          </li>
 
-            </ul>
-            {/* End of Sidebar */}
-            {/* Content Wrapper */}
-            <div id="content-wrapper" className="d-flex flex-column">
-              <nav className={`navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ${styles.nav}`}>
-
-                <div className={`${styles.info}`}>
-                  <div className={`${styles.infoItem}`} >
-                    <i className="fas fa-gas-pump"></i>
-                    <ProgressBar now={60} />
-                  </div>
-                  <div className={`${styles.infoItem}`} >
-                    <i className="fas fa-oil-can"></i>
-                    <ProgressBar now={30} variant="danger" />
-                  </div>
-
-                </div>
-
-                <div className={styles.drops}>
-                  <Dropdown className={`${styles.menu}`} >
-                    <Dropdown.Toggle className={``}>
-                      <i className="fas fa-envelope mr-2"></i>
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu variant="dark" className='mt-2' style={{ maxWidth: 300 }} >
-                      <Dropdown.Item href="#/action-1" active>
-                        Action
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} href="/dashboard/profile">Es hora de cambiar el aceite de tu moto</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-
-
-                  <Dropdown className={`${styles.menu}`} >
-                    <Dropdown.Toggle as="span" className={styles.toggle}>
-                      <span className="mr-2">{user && user.name}</span>
-                      <Image src={`https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user && user.name}`} className='rounded-circle' />
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu variant="dark" className='mt-2' >
-                      <Dropdown.Item href="#/action-1">
-                        <i className="fas fa-user-circle"></i> <span className="ml-2">Perfil</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item as={Link} href="/dashboard/profile">
-                        <i className="fas fa-clipboard-list"></i> <span className="ml-2">Horarios</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">
-                        <i className="fas fa-store"></i> <span className="ml-2">Tienda</span>
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item href="/" onClick={handleLogout}>
-                        <i class="fas fa-door-open"></i> <span className="ml-2">Cerrar Sesión</span>
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <i class="fas fa-comments-alt"></i>
-
-                </div>
-
-
-
-              </nav>
-              <div className='row'>
-                {children}
+        </ul>
+        {/* End of Sidebar */}
+        {/* Content Wrapper */}
+        <div id="content-wrapper" className="d-flex flex-column">
+          <nav className={`navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ${styles.nav}`}>
+            
+            <div className={`${styles.info}`}>
+              <div className={`${styles.infoItem}`} >
+                <i className="fas fa-gas-pump"></i>
+                <ProgressBar now={60} variant="warning" />
               </div>
+              <div className={`${styles.infoItem}`} >
+                <i className="fas fa-oil-can"></i>
+                <ProgressBar now={30} variant="warning" />
+              </div>
+              
+            </div>
+
+            <div className={styles.drops}>
+              <Dropdown className={`${styles.menu} `} >
+                  <Dropdown.Toggle className={`btn-warning`}>
+                    <i className="fas fa-envelope mr-2"></i>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu variant="dark" className='mt-2' style={{maxWidth: 300}} >
+                    <Dropdown.Item href="#/action-1" active>
+                      Action
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link}  href="/dashboard/profile">Es hora de cambiar el aceite de tu moto</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+
+                <Dropdown className={`${styles.menu}`} >
+                  <Dropdown.Toggle as="span" className={styles.toggle}>
+                    <span className="mr-2">{user && user.name}</span>
+                    <Image src={`https://ui-avatars.com/api/?background=e7cc05&color=fff&name=${user && user.name}`} className='rounded-circle' />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu variant="dark" className='mt-2' >
+                    <Dropdown.Item href="#/action-1">
+                      <i className="fas fa-user-circle"></i> <span className="ml-2">Perfil</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link}  href="/dashboard/profile">
+                      <i className="fas fa-clipboard-list"></i> <span className="ml-2">Horarios</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">
+                      <i className="fas fa-store"></i> <span className="ml-2">Tienda</span>
+                    </Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="/" onClick={handleLogout}>
+                      <i class="fas fa-door-open"></i> <span className="ml-2">Cerrar Sesión</span>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              <i class="fas fa-comments-alt"></i>
+
+            </div>
+            
+            
+
+          </nav>
+          <div className='row'>
+            <div className={styles.container}>
+              {children}
             </div>
           </div>
+        </div>
+      </div>
         </>
       )}
     </>
