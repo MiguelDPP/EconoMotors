@@ -12,18 +12,17 @@ class MyDocument extends Document {
           </Head>
           <body>
             <Main />
-            <NextScript>
-              <script src="../assets/js/jquery.js"></script>
-              <script src="../assets/js/bootstrap.b.js"></script>
+            <NextScript />
+            {/* <script src="../assets/js/jquery.js"></script>
+            <script src="../assets/js/bootstrap.b.js"></script>
 
-              <script src="../assets/js/jq.easing.js"></script>
-              <script src="../assets/js/sb-admin.js"/>
+            <script src="../assets/js/jq.easing.js"></script>
+            <script src="../assets/js/sb-admin.js"/>
 
-              <script src="../assets/js/dataTables.js"></script>
-              <script src="../assets/js/dataTables.b.js"></script>
-              <script src="../assets/js/dataTables.demo.js"></script>
-            </NextScript>
-            
+            <script src="../assets/js/dataTables.js"></script>
+            <script src="../assets/js/dataTables.b.js"></script>
+            <script src="../assets/js/dataTables.demo.js"></script>
+             */}
           </body>
         </Html>
       );
