@@ -151,7 +151,7 @@ const DashboardLayout = ({ children }) => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu variant="dark" className='mt-2' >
-                    <Dropdown.Item href="#/action-1">
+                    <Dropdown.Item href="/dashboard/profile">
                       <i className="fas fa-user-circle"></i> <span className="ml-2">Perfil</span>
                     </Dropdown.Item>
                     <Dropdown.Item as={Link}  href="/dashboard/profile">
