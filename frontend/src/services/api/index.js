@@ -6,6 +6,7 @@ const endPoints = {
         login: `${API}/api/login`,
         userProfile: `${API}/api/user`,
         sendEmail: `${API}/api/recovery`,
+        updateUser: `${API}/api/user`,
     }
 }
 

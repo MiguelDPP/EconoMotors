@@ -30,6 +30,15 @@ function useProvideAuth(){
         });
         return response;
     }
+    //Peticion a la API para actuailizar los usuarios
+    const updateUser = async (data) =>{
+        const response = await axios.patch(endPoints.auth.updateUser, data ,{
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        return response;
+    }
 
     //Peticion a la API para obtener los datos del usuario
     const getUser = async () => {
