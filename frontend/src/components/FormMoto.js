@@ -7,10 +7,14 @@ import moto from '@images/Moto/notMotor.webp';
 import endPoints from '@services/api';
 import axios from 'axios';
 import { useAlert } from '@hooks/useAlert';
+import Motor from '@services/api/Motor';
+import { useAuth } from '@hooks/useAuth';
 
 const FormMoto = () => {
 
-  
+  const { storeMotorcycle } = Motor();
+
+  const { user, getUser } = useAuth();
 
   const handleSubmit = (values) => {
     if (motoSelect == null) {
@@ -26,14 +30,41 @@ const FormMoto = () => {
         type: '',
       });
 
-      // Aqui quedamos
+      console.log(values);
+
+      const data = {
+        'presentation_id': motoSelect.id,
+        'year': values.year,
+        'purchase_date': values.purchase_date,
+        'mileage': values.mileage,
+      }
+
+      storeMotorcycle(data)
+        .then((response) => {
+          setAlert({
+            active: true,
+            message: 'Moto registrada correctamente',
+            type: 'success',
+          });
+
+          getUser();
+
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: 'Error al registrar la moto',
+            type: 'danger',
+          });
+        });
+      
     }
   }
 
   const [brands, setBrands] = useState(null);
   const [models, setModels] = useState(null);
   const [presentations, setPresentations] = useState(null);
-  const [motoSelect, setMotoSelect] = useState(null);
+  const [motoSelect, setMotoSelect] = useState(user.motorbikes[0]);
   const {alert, setAlert, toggleAlert} = useAlert();
 
   useEffect(() => {
@@ -264,13 +295,13 @@ const FormMoto = () => {
               </Col>
               <Col xs={6}>
                 <h3 className='text-center'>Ficha tecnica</h3>
-                <p><strong>Marca:</strong> <span>-</span></p>
-                <p><strong>Moto:</strong> <span>-</span></p>
-                <p><strong>Presentacion:</strong> <span>-</span></p>
-                <p><strong>Año:</strong> <span>-</span></p>
-                <p><strong>Cilindraje:</strong> <span>124 cc</span></p>
-                <p><strong>Kilometros por Galon:</strong> <span>125 km</span></p>
-                <p><strong>Capacidad del tanque:</strong> <span>1.2 Gal</span></p>
+                <p><strong>Marca:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].motorcycle.brand.name:'-'}</span></p>
+                <p><strong>Moto:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].motorcycle.name:'-'}</span></p>
+                <p><strong>Presentacion:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].name:'-'}</span></p>
+                <p><strong>Año:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].pivot.year:'-'}</span></p>
+                <p><strong>Cilindraje:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].cylinder_capacity:'-'}</span></p>
+                <p><strong>Kilometros por Galon:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].miles_per_gallon:'-'}</span></p>
+                <p><strong>Capacidad del tanque:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].tank_capacity:'-'}</span></p>
               </Col>
             </Row>
             <Row>
@@ -278,26 +309,26 @@ const FormMoto = () => {
               {/* Linea Divisora */}
               <Row className='mt-1'>
                 <Col xs={6}>
-                  <p><strong>Fecha de compra:</strong> <span>2021-01-01</span></p>
+                  <p><strong>Fecha de compra:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].pivot.purchase_date:'-'}</span></p>
                 </Col>
                 <Col xs={6}>
-                  <p><strong>Fecha de cambio de aceite:</strong> <span>2021-01-01</span></p>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={6}>
-                  <p><strong>Fecha de cambio de gasolina:</strong> <span>2021-01-01</span></p>
-                </Col>
-                <Col xs={6}>
-                  <p><strong>Precio de gasolina:</strong> <span>2021-01-01</span></p>
+                  <p><strong>Fecha de cambio de aceite:</strong> <span>-</span></p>
                 </Col>
               </Row>
               <Row>
                 <Col xs={6}>
-                  <p><strong>Kilometraje:</strong> <span>2021-01-01</span></p>
+                  <p><strong>Fecha de cambio de gasolina:</strong> <span>-</span></p>
                 </Col>
                 <Col xs={6}>
-                  <p><strong>Fecha de tecnomecanica:</strong> <span>2021-01-01</span></p>
+                  <p><strong>Precio de gasolina:</strong> <span>-</span></p>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <p><strong>Kilometraje:</strong> <span>-</span></p>
+                </Col>
+                <Col xs={6}>
+                  <p><strong>Fecha de tecnomecanica:</strong> <span>-</span></p>
                 </Col>
               </Row>
               
