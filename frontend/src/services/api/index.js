@@ -14,6 +14,10 @@ const endPoints = {
         regiterMotorcycle: `${API}/api/motorcycle`,
         updateMotorcycle: `${API}/api/motorcycle`,
     },
+    schedule:{
+        registerSchedule: `${API}/api/schedule`,
+        updateSchedule: `${API}/api/schedule`,
+    },
 }
 
 export default endPoints;
