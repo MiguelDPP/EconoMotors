@@ -12,7 +12,7 @@ import { useAuth } from '@hooks/useAuth';
 
 const FormMoto = () => {
 
-  const { storeMotorcycle } = Motor();
+  const { storeMotorcycle, updateMotorcycle } = Motor();
 
   const { user, getUser } = useAuth();
 
@@ -39,7 +39,8 @@ const FormMoto = () => {
         'mileage': values.mileage,
       }
 
-      storeMotorcycle(data)
+      if (user.motorbikes[0] == null) {
+        storeMotorcycle(data)
         .then((response) => {
           setAlert({
             active: true,
@@ -57,6 +58,26 @@ const FormMoto = () => {
             type: 'danger',
           });
         });
+      }else {
+        updateMotorcycle(data)
+        .then((response) => {
+          setAlert({
+            active: true,
+            message: 'Moto actualizada correctamente',
+            type: 'success',
+          });
+
+          getUser();
+
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: 'Error al actualizar la moto',
+            type: 'danger',
+          });
+        });
+      }
       
     }
   }
@@ -140,9 +161,9 @@ const FormMoto = () => {
               // brand: '',
               // moto: '',
               presentation: '',
-              year: '',
-              purchase_date: '',
-              mileage: '',
+              year: (user.motorbikes[0] != null) ? user.motorbikes[0].pivot.year : '',
+              purchase_date: (user.motorbikes[0] != null) ? user.motorbikes[0].pivot.purchase_date : '',
+              mileage: (user.motorbikes[0] != null) ? user.motorbikes[0].mileage_record.mileage : '',
             }}
           >
             {({
@@ -255,6 +276,8 @@ const FormMoto = () => {
                       </Form.Label>
                       <Field as={Form.Control} name="mileage" type="number" placeholder="Kilometraje" 
                         isInvalid={touched.mileage && !!errors.mileage}
+                        // Desabilitar
+                        disabled={(user.motorbikes[0] != null) ? true : false}
                       />
                     </Form.Group>
                   </Col>
@@ -273,7 +296,7 @@ const FormMoto = () => {
                 <Row className='mt-4'>
                   <Col xs={12}>
                     <Button type="submit" variant="primary" className={`${styles.button}`}>
-                      Registrar
+                      {user.motorbikes.length > 0 ? 'Actualizar' : 'Guardar'}
                     </Button>
                   </Col>
                 </Row>
@@ -299,9 +322,9 @@ const FormMoto = () => {
                 <p><strong>Moto:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].motorcycle.name:'-'}</span></p>
                 <p><strong>Presentacion:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].name:'-'}</span></p>
                 <p><strong>Año:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].pivot.year:'-'}</span></p>
-                <p><strong>Cilindraje:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].cylinder_capacity:'-'}</span></p>
-                <p><strong>Kilometros por Galon:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].miles_per_gallon:'-'}</span></p>
-                <p><strong>Capacidad del tanque:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].tank_capacity:'-'}</span></p>
+                <p><strong>Cilindraje:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].cylinder_capacity:'-'} cc</span></p>
+                <p><strong>Kilometros por Galon:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].miles_per_gallon:'-'} km</span></p>
+                <p><strong>Capacidad del tanque:</strong> <span>{user.motorbikes[0]?user.motorbikes[0].tank_capacity:'-'} gal</span></p>
               </Col>
             </Row>
             <Row>
@@ -325,7 +348,7 @@ const FormMoto = () => {
               </Row>
               <Row>
                 <Col xs={6}>
-                  <p><strong>Kilometraje:</strong> <span>-</span></p>
+                  <p><strong>Kilometraje:</strong> <span>{(user.motorbikes[0] != null) ? user.motorbikes[0].mileage_record.mileage + ' km' : '-'}</span></p>
                 </Col>
                 <Col xs={6}>
                   <p><strong>Fecha de tecnomecanica:</strong> <span>-</span></p>
