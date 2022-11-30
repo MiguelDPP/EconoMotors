@@ -12,6 +12,7 @@ const endPoints = {
         motor: (brand) => `${API}/api/motorcycles/${brand}`,
         presentations: (motor) => `${API}/api/presentations/${motor}`,
         regiterMotorcycle: `${API}/api/motorcycle`,
+        updateMotorcycle: `${API}/api/motorcycle`,
     },
 }
 

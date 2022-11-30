@@ -88,13 +88,13 @@ const DashboardLayout = ({ children }) => {
           <hr className="sidebar-divider my-0" />
           {/* Nav Item - Dashboard */}
           <li className="nav-item nav-dh active">
-            <Link className="nav-link" href="/dashboard">
-              <i className="fas fa-fw fa-tachometer-alt" />
+            <Link className="nav-link" href="/dashboard/profile">
+            <i className="fas fa-user-circle" />
               <span>Perfil</span></Link>
           </li>
           <li className="nav-item nav-dh ">
             <Link className="nav-link" href="/dashboard/moto">
-              <i className="fas fa-fw fa-tachometer-alt" />
+            <i className="fas fa-motorcycle" />
               <span>Moto</span></Link>
           </li>
           <li className="nav-item nav-dh">

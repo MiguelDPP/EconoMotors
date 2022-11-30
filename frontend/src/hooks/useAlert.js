@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from 'react';
+import { useState, useContext, createContext, useEffect } from 'react';
 
 const AlertContext = createContext({});
 
@@ -18,10 +18,24 @@ const useProvideAlert = (options) => {
       type: '',
       autoClose: true,
     };
+
+    
+
     const [alert, setAlert] = useState({
       ...defaultOptions,
       ...options,
     });
+
+
+    useEffect(() => {
+      if (alert.active) {
+        setTimeout(() => {
+          setAlert(
+            defaultOptions
+          );
+        }, 3000);
+      }
+    }, [alert]);
     const toggleAlert = () => {
       setAlert(!alert.active);
     };
