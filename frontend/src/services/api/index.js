@@ -16,7 +16,10 @@ const endPoints = {
     },
     schedule:{
         registerSchedule: `${API}/api/schedule`,
-        updateSchedule: `${API}/api/schedule`,
+        updateSchedule: (id) => `${API}/api/schedule/${id}`,
+        showSchedules: `${API}/api/schedules`,
+        showSchedule: (id) => `${API}/api/schedule/${id}`,
+        deleteSchedule: (id) => `${API}/api/schedule/${id}`,
     },
 }
 

@@ -23,8 +23,8 @@ const Table = ({ locateInitial, locateFinal, handleDelete, checkOtherRoutes, set
       id: 1,
       'Descripción': 'Primera ruta',
       // Disminuir los decimales
-      'Latitud': locateInitial.lat.toFixed(6),
-      'Logitud': locateInitial.lng.toFixed(6),
+      'Latitud': locateInitial.lat,
+      'Logitud': locateInitial.lng,
       // Botones
       'Acciones': ''
     }
@@ -35,8 +35,8 @@ const Table = ({ locateInitial, locateFinal, handleDelete, checkOtherRoutes, set
       data[index + 1] = {
         id: index + 2,
         'Descripción': `Alterna ${index + 1}`,
-        'Latitud': item.route.lat.toFixed(6),
-        'Logitud': item.route.lng.toFixed(6),
+        'Latitud': item.route.lat,
+        'Logitud': item.route.lng,
         'Acciones': ''
       }
     })
@@ -47,8 +47,8 @@ const Table = ({ locateInitial, locateFinal, handleDelete, checkOtherRoutes, set
       id: data.length + 1,
       'Descripción': 'Segunda ruta',
       // Disminuir los decimales
-      'Latitud': locateFinal.lat.toFixed(6),
-      'Logitud': locateFinal.lng.toFixed(6),
+      'Latitud': locateFinal.lat,
+      'Logitud': locateFinal.lng,
       // Botones
       'Acciones': ''
     }
