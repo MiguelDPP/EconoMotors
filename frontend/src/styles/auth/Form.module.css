@@ -123,3 +123,16 @@ background: linear-gradient(to left, #1c1b1b, #232526); /* W3C, IE 10+/ Edge, Fi
   background: #FFFFFF;
   border: 1px solid #e7cc05;
 }
+
+.textCenter{
+  text-align: center !important;
+}
+
+.textArea{
+  width: 100%;
+  background-color: #FFF;
+  color: #000000;
+  border-radius: 5px;
+  border: 0.5px solid rgb(193, 190, 190);
+  padding: 2px;
+}

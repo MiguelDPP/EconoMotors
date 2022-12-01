@@ -14,6 +14,15 @@ const endPoints = {
         regiterMotorcycle: `${API}/api/motorcycle`,
         updateMotorcycle: `${API}/api/motorcycle`,
     },
+    tool:{
+        gasoline: `${API}/api/gasoline`,
+        gasolines: `${API}/api/gasolines`,
+        oil: `${API}/api/oil`,
+        oils: `${API}/api/oils`,
+        tecnomecanical: `${API}/api/Tecnomecanical`,
+        tecnomecanicals: `${API}/api/Tecnomecanicalss`,
+
+    }
 }
 
 export default endPoints;

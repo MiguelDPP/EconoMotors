@@ -2511,6 +2511,11 @@
     background-color: #f6c23e;
     border-color: #f6c23e;
   }
+  .btn-warning-invert {
+    color: #f6c23e !important;
+    background-color: #fff !important;
+    border-color: #f6c23e !important;
+  }
   
   .btn-warning:hover {
     color: #fff;
