@@ -14,12 +14,7 @@ const FormAceite = () =>{
     const { storeOil, getOils } = Tools();
     const [isValid, setIsValid] = useState(false);
 
-    const schema = yup.object().shape({
-        date: yup.string().required('Campo obrigatorio'),
-        description: yup.string().required('Campo obrigatorio'),
-        price: yup.string().required('Campo obrigatorio')
-    });
-
+    
     useEffect(() => {
         if (alert.active && alert.autoClose) {
           setTimeout(() => {
@@ -58,14 +53,6 @@ const FormAceite = () =>{
     return (
         <div>
             <h5><i class="fas fa-oil-can mr-2"></i>Aceite</h5>
-            <Formik validationSchema={schema} onSubmit={handleSubmit} initialValues={{ date: '', description: '', price: ''}}>              
-            {({
-                handleSubmit,
-                touched,
-                values,
-                resetForm,
-                errors,
-                })=>(    
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className={`${styles.formGroup} mt-4`} controlId="formBasicEmail">
                                 <Form.Label className={`${styles.formLabel}`}>Fecha de Registro <span>*</span></Form.Label>
@@ -100,8 +87,6 @@ const FormAceite = () =>{
                         <i class="fas fa-save mr-2"></i>Registrar
                         </Button>
                     </Form> 
-                    )}
-            </Formik>
         </div>
     )
 }

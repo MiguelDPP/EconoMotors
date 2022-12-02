@@ -5,30 +5,29 @@ import DataTable from 'react-data-table-component';
 const TableGasolines = ({ Gasolines }) => {
   const columns = [
     {
-      name: 'id', 
-      selector: 'id',
+      name: 'Id', 
+      selector: 'Id',
       sortable: false,
     },
     {
-      name: 'Fecha de Registro',
+      name: 'Fecha',
       selector: 'Fecha',
       sortable: false,
     },
     {
-      name: 'Estacion o Bomba',
+      name: 'Estacion',
       selector: 'Estacion',
+      sortable: false,
+    },
+    {
+      name: 'PrecioXgalon',
+      selector: 'PrecioXgalon',
       sortable: false,
     },
     {
       name: 'Precio',
       selector: 'Precio',
       sortable: false,
-    },
-    {
-      name: 'Acciones',
-      selector: 'Acciones',
-      sortable: false,
-      cell: row => <Button variant="danger" onClick={() => handleDelete(row.id)}>Eliminar</Button>
     }
   ];
 
@@ -41,7 +40,7 @@ const TableGasolines = ({ Gasolines }) => {
 
   return (
     <DataTable 
-      title="Rutas"
+      title="Registro de Gasolinas"
       columns={columns}
       data={Gasolines}
       pagination
