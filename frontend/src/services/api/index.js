@@ -20,6 +20,17 @@ const endPoints = {
         showSchedules: `${API}/api/schedules`,
         showSchedule: (id) => `${API}/api/schedule/${id}`,
         deleteSchedule: (id) => `${API}/api/schedule/${id}`,
+        getFullCalendar: `${API}/api/full-schedule`,
+        sheduleException: `${API}/api/schedule-exception`,
+        removeScheduleException: (id) => `${API}/api/schedule-exception/${id}`,
+    },
+    failure: {
+        registerFailure: `${API}/api/failure`,
+        updateFailure: (id) => `${API}/api/failure/${id}`,
+        showFailures: `${API}/api/failures`,
+        showFailure: (id) => `${API}/api/failure/${id}`,
+        deleteFailure: (id) => `${API}/api/failure/${id}`,
+        getComponents: `${API}/api/components`,
     },
 }
 
