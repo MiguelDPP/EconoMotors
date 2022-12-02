@@ -97,6 +97,20 @@ const DashboardLayout = ({ children }) => {
             <i className="fas fa-motorcycle" />
               <span>Moto</span></Link>
           </li>
+          {user.motorbikes.length > 0 && (
+            <>
+              <li className="nav-item nav-dh ">
+                <Link className="nav-link" href="/dashboard/route">
+                <i className="fas fa-route" />
+                <span>Recorrido</span></Link>
+              </li>
+              <li className="nav-item nav-dh ">
+                  <Link className="nav-link" href="/dashboard/schedule">
+                  <i className="fas fa-calendar-week"/>
+                  <span>Calentario</span></Link>
+              </li>
+            </>
+          )}
           <li className="nav-item nav-dh">
             <Link className="nav-link" href="/">
               <i className="fas fa-fw fa-tachometer-alt" />

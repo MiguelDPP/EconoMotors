@@ -22,7 +22,14 @@ const endPoints = {
         tecnomecanical: `${API}/api/Tecnomecanical`,
         tecnomecanicals: `${API}/api/Tecnomecanicalss`,
 
-    }
+    },
+    schedule:{
+        registerSchedule: `${API}/api/schedule`,
+        updateSchedule: (id) => `${API}/api/schedule/${id}`,
+        showSchedules: `${API}/api/schedules`,
+        showSchedule: (id) => `${API}/api/schedule/${id}`,
+        deleteSchedule: (id) => `${API}/api/schedule/${id}`,
+    },
 }
 
 export default endPoints;

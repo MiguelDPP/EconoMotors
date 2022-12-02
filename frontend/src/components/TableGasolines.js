@@ -3,10 +3,15 @@ import { Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 
 const TableGasolines = ({ Gasolines }) => {
+
+  const handleDelete = (id) =>{
+    
+  }
+
   const columns = [
     {
       name: 'Id', 
-      selector: 'Id',
+      selector: 'id',
       sortable: false,
     },
     {
@@ -28,6 +33,12 @@ const TableGasolines = ({ Gasolines }) => {
       name: 'Precio',
       selector: 'Precio',
       sortable: false,
+    },
+    {
+      name: 'Acciones',
+      selector: 'Acciones',
+      sortable: false,
+      cell: row => <Button variant="danger" onClick={() => handleDelete(row.id)}>Eliminar</Button>
     }
   ];
 
