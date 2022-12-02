@@ -151,7 +151,7 @@ const FormMoto = () => {
       <Col xs={6}>
         <Card>
           <Card.Header>
-            <Card.Title>Registrar moto</Card.Title>
+            <Card.Title>Informacion de tu moto</Card.Title>
           </Card.Header>
           <Card.Body>
             <Formik
@@ -354,7 +354,6 @@ const FormMoto = () => {
                   <p><strong>Fecha de tecnomecanica:</strong> <span>-</span></p>
                 </Col>
               </Row>
-              
             </Row>
           </Card.Body>
         </Card>

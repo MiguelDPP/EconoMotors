@@ -46,6 +46,8 @@ const FormAdd = ({
     form.current.values.date = '';
     form.current.values.days = [];
     form.current.values.time = '';
+    form.current.values.dateStart = '';
+    form.current.values.dateEnd = '';
   }
 
   if (Button.current) {
@@ -73,12 +75,14 @@ const FormAdd = ({
       });
 
       form.current.values.days = days;
+      form.current.values.dateStart = dataEdit.date_start;
+      form.current.values.dateEnd = dataEdit.date_end;
 
       // validar formulario
       // form.current.validateForm();
-      form.current.handleSubmit = handleSubmit;
-      form.current.setFieldValue('days', days);
-      form.current.setFieldValue('time', dataEdit.time);
+      // form.current.handleSubmit = handleSubmit;
+      // form.current.setFieldValue('days', days);
+      // form.current.setFieldValue('time', dataEdit.time);
     }else {
       handleCancel();
     }
@@ -98,12 +102,17 @@ const FormAdd = ({
         active: true,
         message: "Ingresar fecha",
       });
-    } else if (values.typeRecord == '2' && values.days.length == 0) {
+    } else if (values.typeRecord == '2' && (
+      (values.days == '' || values.days == null) || 
+      (values.dateStart == '' || values.dateStart == null) ||
+      (values.dateEnd == '' || values.dateEnd == null))) { 
+      
       setAlert({
         type: 'danger',
         active: true,
-        message: "Seleccionar días",
+        message: "Completar datos",
       });
+     
     } else {
       if (values.typeRecord == 1 && values.date == '') {
         setAlert({ type: 'danger', active: true, message: 'Debe ingresar una fecha' });
@@ -130,6 +139,8 @@ const FormAdd = ({
             data.date = values.date;
           } else {
             data.days = values.days;
+            data.date_start = values.dateStart;
+            data.date_end = values.dateEnd;
           }
 
           if (otherRoutes.length > 0 && checkOtherRoutes) {
@@ -186,6 +197,8 @@ const FormAdd = ({
         typeRecord: '1',
         time: '',
         date: '',
+        dateStart: '',
+        dateEnd: '',
         days: [],
       }}
     >
@@ -242,7 +255,7 @@ const FormAdd = ({
               </Form.Group>
             </Col>
           </Row>
-          <Row className='mt-3 mb-4'>
+          <Row className='mt-3'>
             <Col xs={6}>
               <Form.Group>
                 <Form.Label>Dias</Form.Label>
@@ -283,9 +296,32 @@ const FormAdd = ({
               </Form.Group>
             </Col>
           </Row>
-
-          
-
+          <Row className='mt-3 mb-4'>
+            <Col>
+              <Form.Group>
+                <Form.Label>Fecha de inicio</Form.Label>
+                <Field as={Form.Control} type="date" name="dateStart"
+                  isInvalid={values.dateStart == '' && touched.dateStart}
+                  disabled={values.typeRecord == '1'}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese una fecha valida
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>Fecha de fin</Form.Label>
+                <Field as={Form.Control} type="date" name="dateEnd"
+                  isInvalid={values.dateEnd == '' && touched.dateEnd}
+                  disabled={values.typeRecord == '1'}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese una fecha valida
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
           <Button className='' type="submit">{isEdit ? 'Editar' : 'Agregar'}</Button>
 
           {isEdit && <Button className='ml-2' variant='danger' onClick={handleCancel}>Cancelar</Button>}

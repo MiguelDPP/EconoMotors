@@ -59,6 +59,39 @@ const Schedule = () => {
     return response.data;
   }
 
+  const getFullCalendar = async () => {
+    const response = await axios.get(endPoints.schedule.getFullCalendar, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+
+    return response.data;
+  }
+
+  const storeScheduleException = async (schedule) => {
+    const response = await axios.post(endPoints.schedule.sheduleException, schedule, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+    return response.data;
+  }
+
+  const removeScheduleException = async (id) => {
+    const response = await axios.delete(endPoints.schedule.removeScheduleException(id), {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+
+    return response.data;
+  }
+
+
 
   return {
     storeSchedule,
@@ -66,6 +99,9 @@ const Schedule = () => {
     showSchedule,
     updateSchedule,
     deleteSchedule,
+    getFullCalendar,
+    storeScheduleException,
+    removeScheduleException,
   }
 }
 

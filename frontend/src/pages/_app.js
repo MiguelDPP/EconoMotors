@@ -1,6 +1,9 @@
 import '../styles/globals.css';
 import '@styles/Dashboardstyles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "@fullcalendar/common/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
 // Importar jsQuery de bootstrap
 
 import { useRouter } from 'next/router';

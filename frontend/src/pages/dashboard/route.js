@@ -197,7 +197,7 @@ const route = () => {
 
       <Row className='mt-4 mb-4'>
         <Col xs={4}>
-          <Card style={{ minHeight: '34rem'}}>
+          <Card style={{ minHeight: '39rem'}}>
             <Card.Header>
               <Card.Title className='mt-2'>Informacion adicional</Card.Title>
             </Card.Header>
@@ -214,7 +214,7 @@ const route = () => {
         </Col>
         <Col xs={8}>
           <Card>
-            <Card.Body className={styles.scroll} style={{ height: '34rem', overflowY: 'scroll' }}>
+            <Card.Body className={styles.scroll} style={{ height: '39rem', overflowY: 'scroll' }}>
               <Card.Title>Listado de Rutas</Card.Title>
               <TableList
               setOtherRoutes={setOtherRoutes}
