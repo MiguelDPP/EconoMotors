@@ -17,11 +17,13 @@ const endPoints = {
     tool:{
         gasoline: `${API}/api/gasoline`,
         gasolines: `${API}/api/gasolines`,
+        deleteGasoline:(id) => `${API}/api/gasoline/${id}`,
         oil: `${API}/api/oil`,
         oils: `${API}/api/oils`,
+        deleteOil:(id) => `${API}/api/oil/${id}`,
         tecnomecanical: `${API}/api/Tecnomecanical`,
         tecnomecanicals: `${API}/api/Tecnomecanicalss`,
-
+        deleteTecnomecanical:(id) => `${API}/api/tecnomecanical/${id}`
     },
     schedule:{
         registerSchedule: `${API}/api/schedule`,

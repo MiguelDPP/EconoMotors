@@ -10,6 +10,7 @@
       "@logos/*": ["assets/logo/*"],
       "@js/*": ["assets/js/*"],
       "@hooks/*": ["hooks/*"],
+      "@helps/*": ["helps/*"],
     }
   }
 }

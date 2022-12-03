@@ -59,7 +59,33 @@ const Tools = () => {
     });
     return response.data;
   }
-
+  const deleteGasoline = async (id) => {
+    const response = await axios.delete(endPoints.tool.deleteGasoline(id), {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+    return response.data;
+  }
+  const deleteOil = async (id) => {
+    const response = await axios.delete(endPoints.tool.deleteOil(id), {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+    return response.data;
+  }
+  const deleteTecnomecanical = async (id) => {
+    const response = await axios.delete(endPoints.tool.deleteTecnomecanical(id), {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+    return response.data;
+  }
 
   return {
     storeGasoline,
@@ -67,7 +93,10 @@ const Tools = () => {
     storeTecnomecanical,
     getGasolines,
     getOils,
-    getTecnomecanical
+    getTecnomecanical,
+    deleteGasoline,
+    deleteOil,
+    deleteTecnomecanical
   }
 }
 
