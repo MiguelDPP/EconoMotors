@@ -43,6 +43,12 @@ const endPoints = {
         deleteFailure: (id) => `${API}/api/failure/${id}`,
         getComponents: `${API}/api/components`,
     },
+    statistics: {
+        getNecessaryGasolineGlobal: `${API}/api/getNecessaryGasolineGlobal`,
+        getDataAge: `${API}/api/getDataAge`,
+        getCostByYear: (year) => `${API}/api/getCostByYear/${year}`,
+        getCostByYearGasoline: (year) => `${API}/api/getCostByYearGasoline/${year}`,
+    }
 }
 
 export default endPoints;

@@ -7,13 +7,26 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@hooks/useAuth';
 import Cookie from 'js-cookie';
 import { useAlert } from '@hooks/useAlert';
+import Statistic from '@services/api/Statistic';
 
 const DashboardLayout = ({ children }) => {
-
+  const { getNecessaryGasolineGlobal } = Statistic();
   const router = useRouter();
-  const {user, getUser, setUser} = useAuth();
+  const {user, getUser, setUser, informationGlobal, setInformationGlobal} = useAuth();
   const [isReady, setIsReady] = useState(false);
   const { alert, setAlert, toggleAlert } = useAlert();
+
+  useEffect(() => {
+    getNecessaryGasolineGlobal()
+    .then((response) => {
+      setInformationGlobal(response);
+      // console.log(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }, []);
+  
 
   useEffect(() => {
     if (Cookie.get('access_token') == null) {
@@ -28,6 +41,7 @@ const DashboardLayout = ({ children }) => {
         getUser()
           .then((response) => {
             setIsReady(true);
+            // console.log(user);
           })
           .catch((error) => {
             Cookie.remove("access_token");
@@ -64,7 +78,7 @@ const DashboardLayout = ({ children }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     Cookie.remove("access_token");
-    router.push("/");
+    window.location.reload();
   } 
 
   return (
@@ -78,12 +92,17 @@ const DashboardLayout = ({ children }) => {
         {/* Sidebar */}
         <ul className="navbar-nav bg-gradient-dark-personality sidebar sidebar-dark accordion" id="accordionSidebar">
           {/* Sidebar - Brand */}
-          <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+          <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
             <div className="sidebar-brand-icon rotate-n-15 text-warning">
             <i className="fas fa-motorcycle"></i>
             </div>
             <div className="sidebar-brand-text mx-3 text-warning">EconoMotors</div>
           </Link>
+          <li className="nav-item nav-dh">
+            <Link className="nav-link" href="/dashboard">
+              <i className="fas fa-fw fa-tachometer-alt" />
+              <span>Dashboard</span></Link>
+          </li>
           {/* Divider */}
           <hr className="sidebar-divider my-0" />
           {/* Nav Item - Dashboard */}
@@ -117,16 +136,12 @@ const DashboardLayout = ({ children }) => {
               </li>
             </>
           )}
-          <li className="nav-item nav-dh">
-            <Link className="nav-link" href="/">
-              <i className="fas fa-fw fa-tachometer-alt" />
-              <span>Mantenimiento</span></Link>
-          </li>
-          <li className="nav-item nav-dh">
+          
+          {/* <li className="nav-item nav-dh">
             <Link className="nav-link" href="/connect">
             <i className="fas fa-server"></i>
               <span>Broker</span></Link>
-          </li>
+          </li> */}
 
         </ul>
         {/* End of Sidebar */}
@@ -139,12 +154,12 @@ const DashboardLayout = ({ children }) => {
                 <>
                   <div className={`${styles.infoItem}`} >
                     <i className="fas fa-gas-pump"></i>
-                    <ProgressBar now={60} variant="warning" />
+                    <ProgressBar now={(informationGlobal.gasoline_today)?Math.round((informationGlobal.gasoline_today/user.motorbikes[0].tank_capacity)*100):0} variant="warning" />
                   </div>
-                  <div className={`${styles.infoItem}`} >
+                  {/* <div className={`${styles.infoItem}`} >
                     <i className="fas fa-oil-can"></i>
-                    <ProgressBar now={30} variant="warning" />
-                  </div>
+                    <p>{informationGlobal.date_change_oil}</p>
+                  </div> */}
                 </>
               ) }
 
@@ -157,7 +172,7 @@ const DashboardLayout = ({ children }) => {
             </div>
 
             <div className={styles.drops}>
-              <Dropdown className={`${styles.menu} `} >
+              {/* <Dropdown className={`${styles.menu} `} >
                   <Dropdown.Toggle className={`btn-warning`}>
                     <i className="fas fa-envelope mr-2"></i>
                   </Dropdown.Toggle>
@@ -171,7 +186,7 @@ const DashboardLayout = ({ children }) => {
                     <Dropdown.Divider />
                     <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item>
                   </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
 
 
                 <Dropdown className={`${styles.menu}`} >
@@ -184,12 +199,12 @@ const DashboardLayout = ({ children }) => {
                     <Dropdown.Item as={Link} href="/dashboard/profile">
                       <i className="fas fa-user-circle"></i> <span className="ml-2">Perfil</span>
                     </Dropdown.Item>
-                    <Dropdown.Item as={Link}  href="/dashboard/profile">
+                    <Dropdown.Item as={Link}  href="/dashboard/schedule">
                       <i className="fas fa-clipboard-list"></i> <span className="ml-2">Horarios</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
+                    {/* <Dropdown.Item href="#/action-3">
                       <i className="fas fa-store"></i> <span className="ml-2">Tienda</span>
-                    </Dropdown.Item>
+                    </Dropdown.Item> */}
                     <Dropdown.Divider />
                     <Dropdown.Item href="/" onClick={handleLogout}>
                       <i class="fas fa-door-open"></i> <span className="ml-2">Cerrar Sesión</span>
