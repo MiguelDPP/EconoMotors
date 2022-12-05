@@ -41,6 +41,16 @@ const Tools = () => {
     return response.data;
   }
 
+  const getNecessaryGasoline = async () => {
+    const response = await axios.get(endPoints.tool.getNecessaryGasoline, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookie.get("access_token")}`,
+      },
+    });
+    return response.data;
+  }
+
   const getOils = async () => {
     const response = await axios.get(endPoints.tool.oils, {
       headers: {
@@ -96,7 +106,8 @@ const Tools = () => {
     getTecnomecanical,
     deleteGasoline,
     deleteOil,
-    deleteTecnomecanical
+    deleteTecnomecanical,
+    getNecessaryGasoline
   }
 }
 

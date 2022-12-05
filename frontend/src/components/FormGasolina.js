@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Row, Col, Alert, Button, InputGroup } from 'react-bootstrap';
+import { Form, Row, Col, Alert, Button, InputGroup, ProgressBar  } from 'react-bootstrap';
 import styles from '@styles/auth/Form.module.css';
+import loadWindows from './loadWindows.js';
 import { useRouter } from 'next/router';
 import { useAlert } from '@hooks/useAlert';
 import { Formik, Field } from 'formik';
@@ -13,15 +14,14 @@ import { InputMilesKeyup, InputFormatMiles, QuitFormatMiles } from '@helps/useMi
 import { dateNow } from '@helps/useDate';
 import parse from 'html-react-parser';
 
+
 import * as yup from 'yup';
-
-
 
 const FormGasolina = () =>{
 
 
     const { alert, setAlert, toggleAlert } = useAlert();
-    const { storeGasoline, getGasolines } = Tools();
+    const { storeGasoline, getGasolines, getNecessaryGasoline } = Tools();
     const { user } = useAuth();
 
     const [isValid, setIsValid] = useState(false);
@@ -30,8 +30,7 @@ const FormGasolina = () =>{
     const [isReadyData, setIsReadyData] = useState(false);
     const [isChangeDelete, setIsChangeDelete] = useState(false);
     const [inputPriceMax, setInputPriceMax ] = useState(0);
-
- 
+    const [stateTanque, setStateTanque] = useState({ tank : 0, galon : 0 });
 
     const dataGasoline = [
         {
@@ -62,7 +61,9 @@ const FormGasolina = () =>{
 
     useEffect(() =>{
         getFunctionGasolines();
-        console.log();
+    }, []);
+    useEffect(() =>{
+        ProgressGasoline();
     }, []);
 
     useEffect(() =>{
@@ -79,6 +80,7 @@ const FormGasolina = () =>{
                 });
             }
             setdataTables(JsonData);
+            ProgressGasoline();
         }
 
     }, [itemsGasolines]);
@@ -95,30 +97,31 @@ const FormGasolina = () =>{
         var pricegalon = event.target.priceXgalon;
         var msg = "";
         var isValid = true;
+        
 
         if(dates.value == "" || station.value == "" || pricegalon.value == "" ||price.value == ""){
             isValid = false;
-            console.log("Campos vacios");
             if(dates.value == ""){
-                msg += " Es obligatorio completar el campo ( Fecha ) <br>";
+                msg += " Es obligatorio completar el campo <b>( Fecha ) </b><br>";
             }
             if(station.value == ""){
-                msg += " Es obligatorio completar el campo ( Bomba ) <br>";
+                msg += " Es obligatorio completar el campo <b>( Bomba ) </b><br>";
             }
             if(pricegalon.value == ""){
-                msg += " Es obligatorio completar el campo ( Precio por Galon ) <br>";
+                msg += " Es obligatorio completar el campo <b>( Precio por Galon ) </b> <br>";
             }
             if(price.value == ""){
-                msg += " Es obligatorio completar el campo ( Precio ) <br>";
+                msg += " Es obligatorio completar el campo <b>( Precio )</b> <br>";
             }
         }
 
-        const cantMaxPrice = pricegalon.value * user.motorbikes[0].tank_capacity;
-        if(price.value > cantMaxPrice){
+        const cantMaxPrice = QuitFormatMiles(pricegalon.value) * stateTanque.galon;
+        console.log("Precio maximo : " + cantMaxPrice);
+        if(QuitFormatMiles(price.value) > cantMaxPrice){
             isValid = false;
             msg += `El precio supera el valor de la compra maxima.`;
         }
-        const FechaNow = dateNow();
+        const FechaNow = dateNow("-");
         if(dates.value > FechaNow ){
             isValid = false;
             msg += `No puedes registrar gasolina en una fecha mayor que la de hoy!`;
@@ -146,6 +149,7 @@ const FormGasolina = () =>{
             .then((response) =>{
                 setAlert({
                     active: true,
+                    header: '<b>Muy bien!</b> <hr>',
                     message: 'Has depositado gasolina correctamente.',
                     type: 'success',
                   });
@@ -170,47 +174,59 @@ const FormGasolina = () =>{
     const handleKeyup = (e) =>{
         InputMilesKeyup(e);
         var priceXGalon = QuitFormatMiles(e.target.value);
-        const priceXmax = priceXGalon * user.motorbikes[0].tank_capacity;
+        const priceXmax = Math.round(priceXGalon * stateTanque.galon);
         setInputPriceMax(InputFormatMiles(priceXmax));
+    }
+
+    
+    function ProgressGasoline() {
+        console.log(dateNow("/"));
+        getNecessaryGasoline().then((response) =>{
+            const procentage =  Math.round((response.gasoline * 100)/user.motorbikes[0].tank_capacity);
+            console.log(procentage);
+            const stateTanques =  100 - procentage;
+            setStateTanque({tank : stateTanques, galon :(response.gasoline).toFixed(2) });
+        });
     }
 
 
     return (
         <div>
-
-            <h5><i class="fas fa-tint mr-2"></i>Gasolina</h5>
+            <h5><i className="fas fa-tint mr-2"></i>Gasolina</h5>
             <Row>
                 <Col>
+                <hr />
+                <p>Estado del tanque (Necesita {stateTanque.galon != 0.00 ? stateTanque.galon : "0"} galones ) : </p>
+                    <ProgressBar now={stateTanque.tank} label={`${stateTanque.tank}%`} />
+                <hr />
+                    { stateTanque.galon > 0 ? 
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group className={`${styles.formGroup} mt-4`} controlId="date">
+                        <Form.Group className={`${styles.formGroup} mt-4`} controlId="exampleForm.date">
                                 <Form.Label className={`${styles.formLabel}`}>Fecha de Registro <span>*</span></Form.Label>
-                                <Form.Control  type="date" name="date" id="date"   placeholder="" className={`${styles.formControl}`}/>
+                                <Form.Control  type="date" name="date" className={`${styles.formControl}`}/>
                         </Form.Group>
-                        <Form.Group className={`${styles.formGroup} mt-4`} controlId="station">
+                        <Form.Group className={`${styles.formGroup} mt-4`} controlId="exampleForm.station">
                                 <Form.Label className={`${styles.formLabel}`}>Bomba <span>*</span></Form.Label>
-                                <Form.Control  type="text" name="station"  id="station"  placeholder="" className={`${styles.formControl}`}  />
+                                <Form.Control  type="text" name="station" className={`${styles.formControl}`}  />
                         </Form.Group>
                         <Row>
                             <Col>
-                                <Form.Group className={`${styles.formGroup} mt-4`} controlId="priceXgalon">
+                                <Form.Group className={`${styles.formGroup} mt-4`} controlId="exampleForm.priceXgalon">
                                         <Form.Label className={`${styles.formLabel}`}>Precio por Galon <span>*</span></Form.Label>
                                         <InputGroup className="mb-3">
-                                            <InputGroup.Text id="priceXgalon-">$</InputGroup.Text>
+                                            <InputGroup.Text>$</InputGroup.Text>
                                             <Form.Control
                                             onKeyUp={handleKeyup}
                                             type="text"
                                             className={`${styles.formControl}`}
-                                            placeholder=""
-                                            aria-label=""
-                                            aria-describedby="priceXgalon-"
-                                            name="priceXgalon"  id="priceXgalon"
+                                            name="priceXgalon" 
                                             />
                                         
                                         </InputGroup>
                                 </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Group className={`${styles.formGroup} mt-4`} controlId="priceXgalon">
+                                <Form.Group className={`${styles.formGroup} mt-4`} controlId="exampleForm.galon">
                                         <Form.Label className={`${styles.formLabel}`}>Capa.. del Tanque</Form.Label>
                                         <InputGroup className="mb-3">
                                             <Form.Control
@@ -219,27 +235,27 @@ const FormGasolina = () =>{
                                             placeholder=""
                                             aria-label=""
                                             aria-describedby="galon-"
-                                            name="galon"  id="galon"
+                                            name="galon"  
                                             disabled
-                                            value={user.motorbikes[0].tank_capacity}
+                                            value={stateTanque.galon}
                                             />
-                                            <InputGroup.Text id="galon-">Galones</InputGroup.Text>
+                                            <InputGroup.Text >Galones</InputGroup.Text>
                                         
                                         </InputGroup>
                                 </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Group className={`${styles.formGroup} mt-4`} controlId="pricemax-">
+                                <Form.Group className={`${styles.formGroup} mt-4`} controlId="exampleForm.pricemax">
                                         <Form.Label className={`${styles.formLabel}`}>Compra Maxima</Form.Label>
                                         <InputGroup className="mb-3">
-                                            <InputGroup.Text id="pricemax-">$</InputGroup.Text>
+                                            <InputGroup.Text >$</InputGroup.Text>
                                             <Form.Control
                                             type="text"
                                             className={`${styles.formControl}`}
                                             placeholder=""
                                             aria-label=""
                                             aria-describedby="pricemax-"
-                                            name="pricemax"  id="pricemax"
+                                            name="pricemax" 
                                             disabled
                                             value={inputPriceMax}
                                             />                    
@@ -248,18 +264,17 @@ const FormGasolina = () =>{
                             </Col>
                         </Row>
 
-                        <Form.Group className={`${styles.formGroup} mt-4`} controlId="price">
+                        <Form.Group className={`${styles.formGroup} mt-4`} controlId="exampleForm.price">
                                 <Form.Label className={`${styles.formLabel}`}>Precio <span>*</span></Form.Label>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Text id="price-">$</InputGroup.Text>
+                                    <InputGroup.Text >$</InputGroup.Text>
                                     <Form.Control
                                     onKeyUp={InputMilesKeyup}
                                     type="text"
                                     className={`${styles.formControl}`}
                                     placeholder=""
                                     aria-label=""
-                                    aria-describedby="price-"
-                                    name="price"  id="price"
+                                    name="price"  
                                     />
                                 
                                 </InputGroup>
@@ -271,14 +286,16 @@ const FormGasolina = () =>{
 
 
                         <Button type="submit" variant="warning" className={`mt-3`}>
-                        <i class="fas fa-save mr-2"></i>Registrar
+                        <i className="fas fa-save mr-2"></i>Registrar
                         </Button>
                     </Form>
+                    : <h4> El tanque de la moto esta lleno.</h4> }
                 </Col>
                 <Col>
                         <TableGasolines setChangeDelete={setIsChangeDelete} Gasolines={dataTables} ></TableGasolines>
                 </Col>
             </Row>
+
         </div>
     )
 }

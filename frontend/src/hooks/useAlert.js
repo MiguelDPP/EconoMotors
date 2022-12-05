@@ -17,6 +17,7 @@ const useProvideAlert = (options) => {
       message: '',
       type: '',
       autoClose: true,
+      header: ''
     };
 
     

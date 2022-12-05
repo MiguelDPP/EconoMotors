@@ -23,7 +23,8 @@ const endPoints = {
         deleteOil:(id) => `${API}/api/oil/${id}`,
         tecnomecanical: `${API}/api/Tecnomecanical`,
         tecnomecanicals: `${API}/api/Tecnomecanicalss`,
-        deleteTecnomecanical:(id) => `${API}/api/tecnomecanical/${id}`
+        deleteTecnomecanical:(id) => `${API}/api/tecnomecanical/${id}`,
+        getNecessaryGasoline: `${API}/api/getNecessaryGasolineGlobal/`,
     },
     schedule:{
         registerSchedule: `${API}/api/schedule`,
