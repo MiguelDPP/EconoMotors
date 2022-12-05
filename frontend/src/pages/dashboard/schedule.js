@@ -8,6 +8,7 @@ import { useAlert } from '@hooks/useAlert';
 const schedule = () => {
   const { alert } = useAlert();
   const [allSchedule, setAllSchedule] = useState([]);
+  const [exceptionSchedule, setExceptionSchedule] = useState([]);
   const { getFullCalendar } = Schedule();
   const [show, setShow] = useState(false);
   const [dataEvent, setDataEvent] = useState({});
@@ -15,6 +16,7 @@ const schedule = () => {
   useEffect(() => {
     getFullCalendar().then((response) => {
       setAllSchedule(response.data);
+      setExceptionSchedule(response.exceptions.date_exepcion);
     })
     .catch((error) => {
       console.log(error);
@@ -32,7 +34,7 @@ const schedule = () => {
             <Card.Title as="h5">Calendario</Card.Title>
           </Card.Header>
           <Card.Body>
-            <Calendar show={show} setShow={setShow} allSchedule={allSchedule} setDataEvent={setDataEvent}/>
+            <Calendar exceptionSchedule={exceptionSchedule} show={show} setShow={setShow} allSchedule={allSchedule} setDataEvent={setDataEvent}/>
           </Card.Body>
         </Card>
       </Col>

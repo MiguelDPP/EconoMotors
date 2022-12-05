@@ -53,6 +53,8 @@ const TableList = ({allSchedule, setIsEdit, setDataEdit, setOtherRoutes}) => {
       'origin': item.origin,
       'destination': item.destination,
       'distance': item.distance + ' m',
+      'date_start': (item.date_start !== null) ? item.date_start : item.date,
+      'date_end': (item.date_end !== null) ? item.date_end : item.date,
       'actions': ''
     }
   })}
@@ -61,13 +63,13 @@ const TableList = ({allSchedule, setIsEdit, setDataEdit, setOtherRoutes}) => {
 
   const columns = [
     // Id oculto  
-    {
-      name: 'id',
-      selector: 'id',
-      sortable: false,
-      // Ocultar columna
-      hide: true,
-    },
+    // {
+    //   name: 'id',
+    //   selector: 'id',
+    //   sortable: false,
+    //   // Ocultar columna
+    //   hide: true,
+    // },
     {
       name: '#',
       selector: '#',
@@ -89,6 +91,18 @@ const TableList = ({allSchedule, setIsEdit, setDataEdit, setOtherRoutes}) => {
       sortable: true,
     },
     {
+      name: 'Fecha de inicio',
+      selector: 'date_start',
+      sortable: true,
+      grow: 2,
+    },
+    {
+      name: 'Fecha de fin',
+      selector: 'date_end',
+      sortable: true,
+      grow: 2,
+    },
+    {
       name: 'Acciones',
       selector: 'actions',
       sortable: false,
@@ -101,6 +115,7 @@ const TableList = ({allSchedule, setIsEdit, setDataEdit, setOtherRoutes}) => {
           <Button variant="danger" onClick={()=> handleDelete(row.id)}><i className="fas fa-trash" /></Button>
         </div>
       ),
+      grow: 2,
     },
   ];
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Modal, Row } from 'react-bootstrap';
+import TarjetChange from './TarjetChange';
 import TarjetRoute from './TarjetRoute';
 
 
@@ -18,7 +19,8 @@ const ModalI = ({ show, setShow, dataEvent, setAllSchedule }) => {
         <Modal.Title>Informacion del Evento</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <TarjetRoute setAllSchedule={setAllSchedule} setShow={setShow} dataEvent={dataEvent} />
+        {dataEvent.type == 'schedule' && <TarjetRoute setAllSchedule={setAllSchedule} setShow={setShow} dataEvent={dataEvent} />}
+        {dataEvent.type != 'schedule' && <TarjetChange dataEvent={dataEvent} />}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

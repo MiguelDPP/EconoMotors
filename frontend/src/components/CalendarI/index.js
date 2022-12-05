@@ -9,11 +9,12 @@ import rrulePlugin from '@fullcalendar/rrule'
 import Schedule from '@services/api/Schedule';
 
 
-const CalendarI = ({ allSchedule, show ,setShow, setDataEvent }) => {
+const CalendarI = ({ allSchedule, show ,setShow, setDataEvent, exceptionSchedule }) => {
 
   const { showSchedule } = Schedule();
 
   const handleEventClick = (arg) => {
+    console.log(arg.event._def.extendedProps);
     switch (arg.event.extendedProps.type) {
       case 'schedule':
         showSchedule((arg.event.extendedProps.isException)?arg.event.extendedProps.schedule_id:arg.event.id).then((response) => {
@@ -32,7 +33,51 @@ const CalendarI = ({ allSchedule, show ,setShow, setDataEvent }) => {
         .catch((error) => {
           console.log(error);
         });
+        break;
+        case 'gasoline':
+          setDataEvent({
+            // Fecha en formato de calendario
+            type:'gasoline',
+            title: 'Tanqueo en '+ arg.event.extendedProps.station,
+            date: arg.event.startStr,
+            price: arg.event.extendedProps.price,
+            priceXgalon: arg.event.extendedProps.priceXgalon,
+            galons: arg.event.extendedProps.galones,
+            km: arg.event.extendedProps.km,
+          });
 
+          setShow(true);
+        break;
+        case 'changeGasoline':
+          setDataEvent({
+            // Fecha en formato de calendario
+            type:'changeGasoline',
+            title: 'Proximo Tanqueo',
+            date: arg.event.startStr,
+            km: arg.event.extendedProps.km,
+          });
+          setShow(true);
+        break;
+        case 'changeOil':
+          setDataEvent({
+            // Fecha en formato de calendario
+            type:'changeOil',
+            title: 'Proximo Cambio de Aceite',
+            date: arg.event.startStr,
+            km: arg.event.extendedProps.km,
+          });
+          setShow(true);
+        break;
+        case 'oil':
+          setDataEvent({
+            // Fecha en formato de calendario
+            type:'oil',
+            title: 'Cambio de Aceite',
+            date: arg.event.startStr,
+            price: arg.event.extendedProps.price,
+            km: arg.event.extendedProps.km,
+          });
+          setShow(true);
         break;
     }
     // setShow(true);
@@ -41,11 +86,28 @@ const CalendarI = ({ allSchedule, show ,setShow, setDataEvent }) => {
 
   function renderEventContent(eventInfo) {
     let type = eventInfo.event.extendedProps.type;
+
+    // Data sin hora
+    
+
+    let isException = false;
+
+    exceptionSchedule.forEach((exception) => {
+      let date = eventInfo.event.startStr.split('T')[0];
+      if (date == exception) {
+        isException = true;
+        return;
+      }
+    });
+
+    // Añadir propiedad 
+
     // let date = 
     // Obtener la fecha del evento
     // console.log(eventInfo);
 
     let color = '';
+    let icon = '';
     switch (type) {
       case 'schedule':
         if (eventInfo.event.extendedProps.isException) {
@@ -57,13 +119,34 @@ const CalendarI = ({ allSchedule, show ,setShow, setDataEvent }) => {
             color = 'primary';
           }
         }
+        icon = 'fa-route';
         break;
-      }
+      case 'gasoline':
+        color = 'dark';
+        icon = 'fa-gas-pump';
+        break;
+      case 'changeGasoline':
+        color = 'dark';
+        icon = 'fa-gas-pump';
+        break;
+      case 'oil':
+        color = 'warning';
+        icon = 'fa-oil-can';
+        break;
+      case 'changeOil':
+        color = 'warning';
+        icon = 'fa-oil-can';
+        break;
+    }
+
+    if (isException) {
+      color = 'danger';
+    }
     
     return (
       <>
-        <span className={`badge badge-${color}`} style={{fontSize:15, width: '100%', height: '100%', cursor: 'pointer'}}>
-        <i className="fas fa-route mr-2" />
+        <span className={`badge badge-${color}`} style={{fontSize:12, width: '100%', height: '100%', cursor: 'pointer'}}>
+        <i className={`fas ${icon} mr-2`} />
           {eventInfo.event.timeText}
         <i>{eventInfo.event.title}</i></span>
       </>

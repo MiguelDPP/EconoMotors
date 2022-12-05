@@ -20,6 +20,7 @@ function useProvideAuth(){
     //Estas son las variables globales que se van a tener en cuenta en la autenticacion
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
+    const [informationGlobal, setInformationGlobal] = useState({});
 
     //Peticion a la API para el registro del usuario
     const register = async (data) =>{
@@ -91,7 +92,9 @@ function useProvideAuth(){
         getUser,
         signin,
         sendEmail,
-        updateUser
+        updateUser,
+        informationGlobal,
+        setInformationGlobal,
     }
 
 }
