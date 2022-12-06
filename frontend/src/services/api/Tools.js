@@ -22,7 +22,7 @@ const Tools = () => {
     return response.data;
   }
   const storeTecnomecanical = async (tecnomecanical) => {
-    const response = await axios.post(endPoints.tool.tecnomecanical, tecnomecanical, {
+    const response = await axios.post(endPoints.tool.tecn, tecnomecanical, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${Cookie.get("access_token")}`,
@@ -61,7 +61,7 @@ const Tools = () => {
     return response.data;
   }
   const getTecnomecanical = async () => {
-    const response = await axios.get(endPoints.tool.tecnomecanical, {
+    const response = await axios.get(endPoints.tool.tecns, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${Cookie.get("access_token")}`,

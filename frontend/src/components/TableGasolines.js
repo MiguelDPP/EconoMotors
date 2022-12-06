@@ -58,7 +58,7 @@ const TableGasolines = ({ Gasolines, setChangeDelete }) => {
       name: 'Acciones',
       selector: 'Acciones',
       sortable: false,
-      cell: row => <Button variant="danger" onClick={() => handleDelete(row.Id)}><i class="fas fa-trash-alt"></i></Button>
+      cell: row =>  <Button variant="danger" onClick={() => handleDelete(row.Id)}><i class="fas fa-trash-alt"></i></Button> 
     }
   ];
 
