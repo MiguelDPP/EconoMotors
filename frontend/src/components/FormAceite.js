@@ -36,7 +36,7 @@ const FormAceite = () =>{
     useEffect(() =>{
         console.log("Solo una vez");
         getFunctionOils();
-    });
+    }, []);
 
     useEffect(() =>{
         var JsonData = [];
