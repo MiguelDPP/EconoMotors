@@ -31,7 +31,7 @@ const FormTecnomecanica = () =>{
             console.log(response);
             setItemsTecno(response.technomechanicals);
         });
-      
+
     }
 
     useEffect(() =>{
@@ -143,11 +143,19 @@ const FormTecnomecanica = () =>{
         }
     }
 
+    const getYearNext = (dates) =>{
+        const array = dates.split('-');
+        const year = parseInt(array[0]) + 1;
+        return year+ "-"+ array[1] + "-"+array[2];
+    }
+
     return (
         <div>
+
             <h5><i class="fas fa-oil-can mr-2"></i>Registro de Tecnomecanica</h5>
             <Row>
                 <Col>
+                    {dataTables.length == 0 || (dataTables[dataTables.length-1] != null && dataTables[dataTables.length-1].Fecha >= dateNow("-")) ?
                     <Form onSubmit={handleSubmit}>
 
                         <Form.Group className={`${styles.formGroup} mt-4`} controlId="formBasicEmail.date">
@@ -189,7 +197,16 @@ const FormTecnomecanica = () =>{
                         <Button type="submit" variant="warning" className={`mt-3`}>
                             <i class="fas fa-save mr-2"></i>Registrar
                         </Button>
-                    </Form> 
+                    </Form>
+                    : <p>
+                        <br></br>
+                        <p className={styles.colorWarning}><i class="fas fa-star"></i> Tecnomecanica Vigente </p>
+                        <p>Fecha de registro : <b>{dataTables[dataTables.length-1].Fecha}</b></p>
+                        <p>Descripcion : <b>{dataTables[dataTables.length-1].Descripcion}</b></p>
+                        <p>Precio : <b>{dataTables[dataTables.length-1].Precio}</b></p>
+                        <p className={styles.colorPrimary}>Fecha de renovación : <b>{getYearNext(dataTables[dataTables.length-1].Fecha)}</b></p>
+                        </p>
+                    } 
                 </Col>
                 <Col>
                     <TableTecnomecanical numPeticion={numPeticion} setnumPeticion={setnumPeticion} changeDelete={isChangeDelete} setChangeDelete={setIsChangeDelete} Tecno={dataTables} ></TableTecnomecanical>

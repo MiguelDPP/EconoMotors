@@ -123,6 +123,12 @@ background: linear-gradient(to left, #1c1b1b, #232526); /* W3C, IE 10+/ Edge, Fi
   background: #FFFFFF;
   border: 1px solid #e7cc05;
 }
+.colorWarning{
+  color: #b6a105 !important;
+}
+.colorPrimary{
+  color: #0e05b6 !important;
+}
 
 .textCenter{
   text-align: center !important;

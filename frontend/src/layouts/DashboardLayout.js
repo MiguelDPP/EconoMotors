@@ -128,6 +128,11 @@ const DashboardLayout = ({ children }) => {
                   <i className="fas fa-calendar-week"/>
                   <span>Calentario</span></Link>
               </li>
+              <li className="nav-item nav-dh ">
+                <Link className="nav-link" href="/dashboard/tools">
+                <i className="fas fa-tools" />
+                <span>Herramientas</span></Link>
+              </li>
               {/* <i class="fas fa-hammer"></i> */}
               <li className="nav-item nav-dh ">
                   <Link className="nav-link" href="/dashboard/repair">

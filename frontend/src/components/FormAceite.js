@@ -25,6 +25,7 @@ const FormAceite = () =>{
     const [numPeticion, setnumPeticion]= useState(false);
 
 
+    //Realiza Peticiones al servidor
     const getFunctionOils = () =>{
         console.log("Funcion Original");
         setnumPeticion(!numPeticion);
@@ -35,6 +36,7 @@ const FormAceite = () =>{
     
     useEffect(() =>{
         console.log("Solo una vez");
+        //La llamo y se debe ejecutar una vez
         getFunctionOils();
     }, []);
 
@@ -58,11 +60,13 @@ const FormAceite = () =>{
 
     useEffect(() =>{
         if(!numPeticion){
+            //La llamo y se debe ejecutar cuando sea valido y halla un cambio
             getFunctionOils();
         }
     }, [isValid, isChangeDelete]);
 
 
+    //Cuando halla un cambio en la alerta pues que se muestre
     useEffect(() => {
         if (alert.active && alert.autoClose) {
           setTimeout(() => {
